@@ -168,6 +168,7 @@ class Trainer():
             scores = self.model(image, question, question_len)
             print(scores.shape)
             print(answer.shape)
+            print(answer.min(), answer.max())
             loss = self.loss_fn(scores, answer)
             loss.backward()
 
