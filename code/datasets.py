@@ -32,8 +32,7 @@ class ClevrDataset(data.Dataset):
 
     def __getitem__(self, index):
         imgfile, question, answer = self.data[index]
-        id = int(imgfile.rsplit('_', 1)[1][:-4])
-        img = torch.from_numpy(self.img[id])
+        img = torch.from_numpy(self.img[imgfile])
 
         return img, question, len(question), answer
 
