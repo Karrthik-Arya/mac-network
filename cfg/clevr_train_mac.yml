@@ -1,6 +1,6 @@
 GPU_ID: '0'
 WORKERS: 8
-CUDA: True
+CUDA: False
 
 TRAIN:
     FLAG: True
