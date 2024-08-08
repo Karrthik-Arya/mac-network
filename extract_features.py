@@ -7,7 +7,8 @@
 import argparse, os, json
 import h5py
 import numpy as np
-from scipy.misc import imread, imresize
+from skimage import io, transform 
+
 
 import torch
 import torchvision
@@ -86,8 +87,8 @@ def main(args):
     i0 = 0
     cur_batch = []
     for i, (path, idx) in enumerate(input_paths):
-      img = imread(path, mode='RGB')
-      img = imresize(img, img_size, interp='bicubic')
+      img = io.imread(path)
+      img = transform.resize(img, img_size)
       img = img.transpose(2, 0, 1)[None]
       cur_batch.append(img)
       if len(cur_batch) == args.batch_size:
