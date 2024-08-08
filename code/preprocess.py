@@ -59,6 +59,7 @@ def process_question(root, split, word_dic=None, answer_dic=None):
 if __name__ == '__main__':
     root = sys.argv[1]
 
+    nltk.download('punkt')
     word_dic, answer_dic = process_question(root, 'train')
     process_question(root, 'val', word_dic, answer_dic)
 
