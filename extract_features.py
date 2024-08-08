@@ -93,6 +93,7 @@ def main(args):
     for i, (path, idx) in enumerate(input_paths):
       img = io.imread(path)
       img = transform.resize(img, img_size)
+      print(img.shape)
       img = img.transpose(2, 0, 1)[None]
       cur_batch.append(img)
       if len(cur_batch) == args.batch_size:
