@@ -99,7 +99,7 @@ def main(args):
       if len(cur_batch) == args.batch_size:
         feats = run_batch(cur_batch, model)
         if feat_dset is None:
-          N = max_idx
+          N = max_idx+1
           _, C, H, W = feats.shape
           feat_dset = f.create_dataset('features', (N, C, H, W),
                                        dtype=np.float32)
