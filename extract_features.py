@@ -68,7 +68,6 @@ def main(args):
   # idx_set = set()
   max_idx = 0
   for fn in os.listdir(args.input_image_dir):
-    print(fn)
     if not fn.endswith('.jpg'): continue
     idx = int(os.path.splitext(fn)[0].split('_')[-1])
     input_paths.append((os.path.join(args.input_image_dir, fn), idx))
