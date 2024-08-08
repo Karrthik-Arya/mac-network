@@ -28,6 +28,11 @@ class ClevrDataset(data.Dataset):
 
         with open(os.path.join(data_dir, '{}.pkl'.format(split)), 'rb') as f:
             self.data = pickle.load(f)
+
+        with open(os.path.join(data_dir, 'dic.pkl'), 'rb') as f:
+            dic = pickle.load(f)
+        ans_dic = dic["answer_dic"]
+        print("classes: ", ans_dic.values())
         self.img = h5py.File(os.path.join(data_dir, '{}.h5'.format(split)), 'r')['features']
 
     def __getitem__(self, index):
