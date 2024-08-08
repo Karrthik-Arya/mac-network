@@ -166,6 +166,8 @@ class Trainer():
             self.optimizer.zero_grad()
 
             scores = self.model(image, question, question_len)
+            print(scores.shape)
+            print(answer.shape)
             loss = self.loss_fn(scores, answer)
             loss.backward()
 
