@@ -28,14 +28,14 @@ class ClevrDataset(data.Dataset):
 
         with open(os.path.join(data_dir, '{}.pkl'.format(split)), 'rb') as f:
             self.data = pickle.load(f)
-        self.img = h5py.File(os.path.join(data_dir, '{}_features.h5'.format(split)), 'r')['features']
+        self.img = h5py.File(os.path.join(data_dir, '{}.h5'.format(split)), 'r')['features']
 
     def __getitem__(self, index):
-        imgfile, question, answer, family = self.data[index]
+        imgfile, question, answer = self.data[index]
         id = int(imgfile.rsplit('_', 1)[1][:-4])
         img = torch.from_numpy(self.img[id])
 
-        return img, question, len(question), answer, family
+        return img, question, len(question), answer
 
     def __len__(self):
         return len(self.data)
@@ -51,7 +51,7 @@ def collate_fn(batch):
     sort_by_len = sorted(batch, key=lambda x: len(x[1]), reverse=True)
 
     for i, b in enumerate(sort_by_len):
-        image, question, length, answer, family = b
+        image, question, length, answer = b
         images.append(image)
         length = len(question)
         questions[i, :length] = question
