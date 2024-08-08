@@ -7,7 +7,7 @@
 import argparse, os, json
 import h5py
 import numpy as np
-from skimage import io, transform 
+from skimage import io, transform, color 
 
 
 import torch
@@ -92,7 +92,8 @@ def main(args):
     for i, (path, idx) in enumerate(input_paths):
       img = io.imread(path)
       img = transform.resize(img, img_size)
-      print(img.shape)
+      if img.ndim == 2:  
+        img = color.gray2rgb(img)
       img = img.transpose(2, 0, 1)[None]
       cur_batch.append(img)
       if len(cur_batch) == args.batch_size:
